@@ -1,0 +1,678 @@
+//<МИКСИНЫ>=============================================================================================
+@mixin anim($time, $delay) {
+	-webkit-transition: all $time ease $delay;
+	-moz-transition: all $time ease $delay;
+	-ms-transition: all $time ease $delay;
+	-o-transition: all $time ease $delay;
+	transition: all $time ease $delay;
+}
+@mixin anim_cibic($time, $delay) {
+	-webkit-transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+	-moz-transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+	-ms-transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+	-o-transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+}
+@mixin rotate($deg) {
+	-moz-transform: rotate($deg);
+	-ms-transform: rotate($deg);
+	-webkit-transform: rotate($deg);
+	-o-transform: rotate($deg);
+	transform: rotate($deg);
+}
+@mixin scale($num) {
+	-moz-transform: scale($num);
+	-ms-transform: scale($num);
+	-webkit-transform: scale($num);
+	-o-transform: scale($num);
+	transform: scale($num);
+}
+@mixin skew($num) {
+	-moz-transform: skewX($num);
+	-ms-transform: skewX($num);
+	-webkit-transform: skewX($num);
+	-o-transform: skewX($num);
+	transform: skewX($num);
+}
+@mixin cnt($h) {
+	display: flex;
+	flex-direction: column;
+	height: $h;
+	text-align: center;
+	align-items: stretch;
+	justify-content: center;
+}
+@mixin tran($x, $y) {
+	transform: translate($x, $y);
+}
+@mixin tr($x, $y, $z) {
+	transform: translate3d($x, $y, $z);
+}
+@mixin flexbox() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	font-size: 0;
+}
+@mixin flexboxinline() {
+	display: -webkit-inline-flex;
+	display: -moz-inline-flex;
+	display: -ms-inline-flex;
+	display: -o-inline-flex;
+	display: inline-flex;
+}
+@mixin flexorder($val) {
+	-webkit-box-ordinal-group: $val;
+	-moz-box-ordinal-group: $val;
+	-ms-flex-order: $val;
+	-webkit-order: $val;
+	order: $val;
+}
+//<ШРИФТЫ>=======================================================================================================
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+@font-face {
+	font-family: "Akzidenz";
+	src: url("../fonts/AkzidenzGrotesk-Bold.eot");
+	src: local("☺"), url("../fonts/AkzidenzGrotesk-Bold.woff") format("woff"),
+		url("../fonts/AkzidenzGrotesk-Bold.ttf") format("truetype"),
+		url("../fonts/AkzidenzGrotesk-Bold.svg") format("svg");
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "netflix";
+	src: url("../netflix.eot");
+	src: url("../netflix.eot?#iefix") format("embedded-opentype"), url("../netflix.otf") format("otf"),
+		url("../netflix.svg#netflix") format("svg"), url("../netflix.ttf") format("truetype"),
+		url("../netflix.woff") format("woff"), url("../netflix.woff2") format("woff2");
+}
+
+//<ПЕРЕМЕННЫЕ>===================================================================================================
+$minwidth: 320px;
+$mw: 900;
+$md1: $mw + 12;
+$md2: 992.98;
+$md3: 767.98;
+$md4: 479.98;
+$fontfamily: "PT Sans";
+//<ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===================================================================================
+@import "_nullstyle";
+//<SCSS ОБЩЕЕ>===================================================================================================
+@mixin fz($pxValue, $property: "font-size", $standard-size: 16) {
+	#{$property}: $pxValue + px;
+	#{$property}: $pxValue/$standard-size + rem;
+}
+@mixin lh($pxValue, $property: "line-height", $standard-size: 16) {
+	#{$property}: $pxValue + px;
+	#{$property}: $pxValue/$standard-size + rem;
+}
+@mixin ls($pxValue, $property: "letter-spacing", $standard-size: 16) {
+	#{$property}: $pxValue + px;
+	#{$property}: $pxValue/$standard-size + rem;
+}
+%tplborder {
+	border-bottom: 2px double rgb(223, 18, 18);
+}
+//@extend %tplborder;
+
+//<ОБОЛОЧКА>======================================================================================================
+.wrapper {
+	font-family: $fontfamily;
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	@include flexbox();
+	flex-direction: column;
+}
+//<ОСНОВНАЯ СЕТКА>================================================================================================
+.container {
+	max-width: $mw + px;
+	margin: 0 auto;
+	width: 100%;
+	font-size: 14px;
+	padding: 0px 10px;
+	@media (max-width: $md1+px) {
+		max-width: 970px;
+	}
+	@media (max-width: $md2+px) {
+		max-width: 750px;
+	}
+	@media (max-width: $md3+px) {
+		max-width: none;
+		padding: 0 10px;
+	}
+}
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>====================================================================
+//@import "popup.scss"
+@import "_header";
+@import "_footer";
+
+//<ОСНОВНОЙ БЛОК>====================================================================================================
+.private {
+	&__row {
+		@include flexbox();
+		@media (max-width: $md3+px) {
+			flex-direction: column;
+		}
+	}
+
+	&__column {
+		flex: 0 0 50%;
+		background: #000;
+	}
+
+	&__img {
+		height: 100%;
+		@media (max-width: $md3+px) {
+			padding: 0px 0px 30% 0px;
+		}
+	}
+
+	&__body {
+		padding: 75px 0px 75px 60px;
+		color: #fff;
+		max-width: 400px;
+		@media (max-width: $md2+px) {
+			padding: 55px 0px 55px 40px;
+		}
+		@media (max-width: $md3+px) {
+			padding: 30px 7px 30px 10px;
+			max-width: none;
+		}
+	}
+
+	&__title {
+		@include fz(50);
+		@include lh(50);
+		margin: 0px 0px 25px 0px;
+		@media (max-width: $md3+px) {
+			margin: 0px 0px 20px 0px;
+			@include fz(45);
+			@include lh(45);
+		}
+	}
+
+	&__subtitle {
+		@include fz(15);
+		@include lh(25);
+		margin: 0px 0px 50px 0px;
+		@media (max-width: $md3+px) {
+			margin: 0px 0px 30px 0px;
+		}
+	}
+
+	.link-private {
+		@include flexbox();
+		align-items: center;
+
+		&__link {
+			display: inline-block;
+			@include fz(15);
+			@include lh(25);
+			@include ls(1.5);
+			font-family: "Bebas";
+			color: #fff;
+			text-transform: uppercase;
+			text-decoration: underline;
+			margin: 0px 0px 0px 15px;
+			@media (max-width: $md3+px) {
+				margin: 0px 0px 0px 7px;
+			}
+		}
+	}
+}
+.btn {
+	@include flexboxinline();
+	justify-content: center;
+	align-items: center;
+	@include lh(50);
+	@include fz(15);
+	height: 50px;
+	padding: 0px 35px;
+	font-family: "Bebas";
+	text-transform: uppercase;
+	position: relative;
+	@include ls(1.5);
+	span {
+		position: relative;
+		z-index: 2;
+	}
+	&:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 0;
+		height: 100%;
+		@include anim(0.3s, 0s);
+	}
+	&_w {
+		background: #fff;
+		color: #000;
+
+		&:hover {
+			color: #fff;
+		}
+		&:hover:after {
+			left: 0;
+			width: 100%;
+			background: #000;
+		}
+	}
+	&_b {
+		background: #000;
+		color: #fff;
+		@include fz(15);
+		&:hover {
+			color: #000;
+		}
+		&:hover:after {
+			left: 0;
+			width: 100%;
+			background: #fff;
+		}
+		@media (max-width: $md2+px) {
+			padding: 0px 15px;
+		}
+	}
+}
+.menu {
+	padding: 75px 0px;
+	@media (max-width: $md2+px) {
+		padding: 55px 0px;
+	}
+	@media (max-width: $md3+px) {
+		padding: 30px 0px;
+	}
+	&__row {
+		@include flexbox();
+		@media (max-width: $md3+px) {
+			flex-wrap: wrap;
+			margin: 0px -10px;
+		}
+	}
+
+	&__column {
+		flex: 0 0 25%;
+		padding: 0px 10px;
+		@media (max-width: $md3+px) {
+			flex: 0 0 50%;
+		}
+		@media (max-width: $md4+px) {
+			flex: 1 1 100%;
+		}
+	}
+}
+.item-menu {
+	@include flexbox();
+	flex-direction: column;
+	height: 100%;
+	position: relative;
+	&__image {
+		display: block;
+		position: relative;
+		padding: 0px 0px 100% 0px;
+		@media (max-width: $md3+px) {
+			padding: 0px 0px 100% 0px;
+		}
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&__title {
+		max-width: 130px;
+		font-family: "Akzidenz";
+		@include lh(25);
+		@include fz(25);
+		color: #000;
+		margin: 25px 0px 30px 0px;
+		@media (max-width: $md3+px) {
+			max-width: none;
+		}
+	}
+
+	&__text {
+		max-width: 200px;
+		flex: 1 1 100%;
+		@include lh(25);
+		@include fz(15);
+		color: #000;
+		margin: 0px 0px 30px 0px;
+		@media (max-width: $md3+px) {
+			max-width: none;
+		}
+	}
+}
+.link-private {
+	display: block;
+	&__link {
+		&_b {
+			display: inline-block;
+			@include fz(15);
+			@include lh(25);
+			@include ls(1.5);
+			font-family: "Bebas";
+			color: #000;
+			text-transform: uppercase;
+			text-decoration: underline;
+			@media (max-width: $md3+px) {
+				margin: 0px 0px 0px 7px;
+			}
+			@media (max-width: $md4+px) {
+				display: block;
+				margin: 10px 0px;
+			}
+		}
+	}
+
+	&__btn {
+		margin: 0px 0px 25px 0px;
+		@media (max-width: $md4+px) {
+			margin: 0px 0px 5px 0px;
+		}
+	}
+}
+
+.top-why {
+	background: #000;
+	@include flexbox();
+	&__column {
+		flex: 0 0 50%;
+		@media (max-width: $md4+px) {
+			flex: 1 1 100%;
+			&:last-child {
+				display: none;
+			}
+		}
+	}
+
+	&__text {
+		padding: 50px 20px 50px 0px;
+		font-family: "Akzidenz";
+		@include lh(50);
+		@include fz(25);
+		color: #fff;
+		text-transform: uppercase;
+		text-align: right;
+		@media (max-width: $md2+px) {
+			padding: 35px 10px;
+			@include fz(22);
+		}
+		@media (max-width: $md3+px) {
+			padding: 20px 10px;
+		}
+	}
+
+	&__img {
+		height: 100%;
+		img {
+		}
+	}
+}
+.bottom-why {
+	background: #ebebeb;
+	&__body {
+		@include flexbox();
+		flex-wrap: wrap;
+		padding: 50px 0px 0px 0px;
+		margin: 0px -10px;
+		@media (max-width: $md2+px) {
+			padding: 35px 0px;
+		}
+		@media (max-width: $md3+px) {
+			padding: 20px 0px;
+		}
+	}
+	&__column {
+		flex: 0 0 50%;
+		margin: 0px 0px 50px 0px;
+		padding: 0px 10px;
+		@media (max-width: $md2+px) {
+			margin: 0px 0px 35px 0px;
+		}
+		@media (max-width: $md3+px) {
+			margin: 0px 0px 20px 0px;
+			flex: 1 1 100%;
+		}
+	}
+}
+.item {
+	@include flexbox();
+	&__icon {
+		flex: 0 0 100px;
+		height: 100px;
+		img {
+			max-width: 100%;
+		}
+	}
+}
+.body-item {
+	flex: 1 1 100%;
+	@include flexbox();
+	flex-direction: column;
+	margin: 0px 0px 0px 10px;
+	max-width: 310px;
+	@media (max-width: $md3+px) {
+		max-width: none;
+	}
+	&__title {
+		flex: 1 1 auto;
+		font-family: "Akzidenz";
+		@include lh(25);
+		@include fz(22);
+		text-transform: uppercase;
+		margin: 0px 0px 5px 0px;
+	}
+
+	&__text {
+		@include lh(25);
+		@include fz(15);
+	}
+}
+.hello {
+	padding: 75px 0px 0px 0px;
+	@media (max-width: $md2+px) {
+		padding: 55px 0px 0px 0px;
+	}
+	@media (max-width: $md3+px) {
+		padding: 30px 0px 0px 0px;
+	}
+	&__title {
+		font-family: "Akzidenz";
+		@include lh(50);
+		@include fz(25);
+		text-transform: uppercase;
+	}
+
+	&__body {
+		@include flexbox();
+		flex-wrap: wrap;
+	}
+
+	&__column {
+		flex: 0 0 50%;
+		margin: 0px 0px 25px 0px;
+		@media (max-width: $md3+px) {
+			flex: 1 1 100%;
+		}
+	}
+
+	&__item {
+		display: block;
+		@include lh(25);
+		@include fz(15);
+		color: #000;
+		padding: 0px 0px 0px 30px;
+		&_l {
+			background: url("../img/checks/06.png") left no-repeat;
+		}
+
+		&_2 {
+			background: url("../img/checks/08.png") left no-repeat;
+		}
+
+		&_3 {
+			background: url("../img/checks/07.png") left no-repeat;
+		}
+	}
+}
+
+.social-contacts {
+	&__item {
+		display: inline-block;
+		margin: 0px 30px 0px 0px;
+		&:last-child {
+			margin: 0;
+		}
+	}
+}
+.map {
+	background: #000;
+	@include flexbox();
+	@media (max-width: $md3+px) {
+		flex-wrap: wrap;
+	}
+	&__column {
+		flex: 0 0 50%;
+		@media (max-width: $md3+px) {
+			flex: 1 1 100%;
+		}
+	}
+}
+.column-map {
+	&__map {
+		height: 100%;
+		@media (max-width: $md3+px) {
+			padding: 0px 0px 60% 0px;
+			min-height: 250px;
+		}
+	}
+}
+.map-form {
+	&__title {
+		@include lh(25);
+		@include fz(25);
+		font-family: "Akzidenz";
+		color: #fff;
+		margin: 0px 0px 25px 60px;
+		text-transform: uppercase;
+		padding: 50px 0px 0px 0px;
+		@media (max-width: $md3+px) {
+			margin: 0px 0px 0px 30px;
+			padding: 20px 0px 0px 0px;
+		}
+	}
+
+	&__body {
+		padding: 50px 60px 50px 60px;
+		max-width: 500px;
+		@media (max-width: $md3+px) {
+			padding: 20px 30px;
+		}
+	}
+
+	&__line {
+		margin: 0px 0px 25px 0px;
+		@media (max-width: $md3+px) {
+			margin: 0px 0px 15px 0px;
+		}
+	}
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.input {
+	border: 2px solid #959595;
+	background: #252525;
+	height: 50px;
+	border-radius: 0 !important;
+	width: 100%;
+	display: block;
+	padding: 0px 18px;
+	font-size: 15px;
+	background-color: #252525;
+	color: #959595;
+	&:focus {
+		border: 1px solid blue;
+	}
+	&.err {
+		border: 1px solid red;
+	}
+}
+textarea.input {
+	resize: none;
+	padding: 10px 18px;
+	height: 100px;
+}
+
+//</INPUT>========================================================================================
+
+//<ПОДКЛЮЧЕНИЕ ФАЙЛОВ UI СТИЛЕЙ, ФОРМ И ГОТОВЫХ КЛАССОВ>=============================================================
+//<Map>========================================================================================
+.gm-style-iw-t {
+	opacity: 0;
+}
+.baloon {
+	opacity: 1;
+	right: -7px !important;
+	bottom: 80px !important;
+	button {
+		display: none !important;
+	}
+	&:after {
+		display: none !important;
+	}
+}
+.baloon-style {
+	display: none;
+}
+.baloon-content.gm-style-iw {
+	opacity: 1;
+	border-radius: 0px !important;
+	max-width: 300px !important;
+	padding: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+	overflow: visible !important;
+	> .gm-style-iw-d {
+		overflow: hidden !important;
+		max-width: none !important;
+	}
+	&:after {
+		display: none !important;
+	}
+}
+.baloon-close {
+	top: 18px !important;
+}
+//</Map>========================================================================================
+//<IBG>========================================================================================
+.ibg {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+}
+.ibg img {
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	visibility: hidden;
+}
+//<|IBG>========================================================================================

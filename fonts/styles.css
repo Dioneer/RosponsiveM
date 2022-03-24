@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'netflix';
+  src: url(./netflix.eot);
+  src: url(./netflix.eot?#iefix) format('embedded-opentype'),
+       url(./netflix.otf) format('otf'),
+       url(./netflix.svg#netflix) format('svg'),
+       url(./netflix.ttf) format('truetype'),
+       url(./netflix.woff) format('woff'),
+       url(./netflix.woff2) format('woff2');
+}

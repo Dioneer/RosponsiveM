@@ -1,0 +1,29 @@
+.footer {
+	padding: 18px 0px;
+}
+.footer-body {
+	@include flexbox();
+	align-items: center;
+	justify-content: space-between;
+	@media (max-width: $md3+px) {
+		flex-wrap: wrap;
+	}
+	&__column {
+		@media (max-width: $md3+px) {
+			flex: 1 1 100%;
+			@include flexbox();
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	&__text {
+		@include lh(25);
+		@include fz(15);
+		align-items: center;
+		color: #4c4c4c;
+		span {
+			text-decoration: underline;
+		}
+	}
+}
